@@ -3,7 +3,7 @@
  * @return {Function}
  */
 const createHelloWorld = function () {
-  return (...args) => 'Hello World'
+  return (..._) => 'Hello World'
 };
 
 /**
