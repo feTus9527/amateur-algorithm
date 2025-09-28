@@ -7,11 +7,11 @@ class Solution:
     """
 
     def rob(self, nums: List[int]) -> int:
-        _n = len(nums)
-        if _n <= 2:
-            return max(nums)
-        _dp = [0] * (_n + 1)
-        _dp[_n - 1] = nums[_n - 1]
-        for i in range(_n - 2, -1, -1):
-            _dp[i] = max(_dp[i + 1], _dp[i + 2] + nums[i])
-        return _dp[0]
+        if len(nums) == 1:
+            return nums[0]
+        _dp = [0] * len(nums)
+        _dp[0] = nums[0]
+        _dp[1] = max(nums[0], nums[1])
+        for i in range(2, len(nums)):
+            _dp[i] = max(_dp[i - 2] + nums[i], _dp[i - 1])
+        return _dp[-1]
