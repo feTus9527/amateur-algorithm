@@ -9,5 +9,8 @@ class Solution:
     def arraySign(self, nums: List[int]) -> int:
         result = 1
         for num in nums:
-            result *= num
-        return 1 if result > 0 else (-1 if result < 0 else 0)
+            if num == 0:
+                return 0
+            elif num < 0:
+                result = -result
+        return result
