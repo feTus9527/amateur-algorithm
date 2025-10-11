@@ -1,6 +1,3 @@
-from typing import List
-
-
 class Solution:
     """
     See: https://leetcode.cn/problems/reverse-words-in-a-string/description/
