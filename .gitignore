@@ -1,3 +1,7 @@
-*/*.class
-.envrc
+# compiled files
+*.class
 *.out
+
+# project files
+.envrc
+.DS_Store
