@@ -17,8 +17,8 @@ A vector implementation must maintain the following attributes:
    - **Output**: A new vector instance with capacity `n`
 2. **Insertion Operations**:
    - **Append**: Add an element to the end of the vector.
-     - **Input**: Integer  `n`  to be appended.
-     - **Effect**: Element is added at position `count`, and `count` is incremented.
+     - **Input**: Integer  `n`  to be appended
+     - **Effect**: Element is added at position `count`, and `count` is incremented
    - **Insert at Position**: Insert an element at a specific position within the vector.
      - **Input**: Integer `n` to insert, index `pos` specifying insertion position
      - **Effect**: Element is inserted at position `pos`, shifting subsequent elements
