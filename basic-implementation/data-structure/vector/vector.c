@@ -60,18 +60,64 @@ int expand_vector(vector *v) {
 }
 
 void print_vector(vector *v) {
-  int len = 0;
-  for (int i = 0; i < v->size; i++) {
-    len += printf("%3d", i);
+  if (v == NULL || v->size == 0) {
+    printf("Empty vector\n");
+    return;
   }
-  printf("\n");
-  for (int i = 0; i < len; i++)
-    printf("-");
-  printf("\n");
-  for (int i = 0; i < v->size; i++) {
-    printf("%3d", v->data[i]);
+
+  int *widths = (int *)malloc(v->size * sizeof(int));
+  if (widths == NULL) {
+    printf("Memory allocation failed\n");
+    return;
   }
-  printf("\n\n");
+
+  int total_width = 0;
+  for (int i = 0; i < v->size; i++) {
+    int index_width = snprintf(NULL, 0, "%d", i);
+    int data_width = snprintf(NULL, 0, "%d", v->data[i]);
+    widths[i] = index_width > data_width ? index_width : data_width;
+    total_width += widths[i];
+  }
+
+  total_width += (v->size - 1);
+
+  printf("┌─");
+  for (int i = 0; i < total_width; i++) {
+    printf("─");
+  }
+  printf("─┐\n");
+
+  printf("│ ");
+  for (int i = 0; i < v->size; i++) {
+    printf("%*d", widths[i], i);
+    if (i < v->size - 1) {
+      printf(" ");
+    }
+  }
+  printf(" │\n");
+
+  printf("├─");
+  for (int i = 0; i < total_width; i++) {
+    printf("─");
+  }
+  printf("─┤\n");
+
+  printf("│ ");
+  for (int i = 0; i < v->size; i++) {
+    printf("%*d", widths[i], v->data[i]);
+    if (i < v->size - 1) {
+      printf(" ");
+    }
+  }
+  printf(" │\n");
+
+  printf("└─");
+  for (int i = 0; i < total_width; i++) {
+    printf("─");
+  }
+  printf("─┘\n\n");
+
+  free(widths);
 }
 
 int main(int argc, char *argv[]) {
@@ -86,7 +132,7 @@ int main(int argc, char *argv[]) {
     case 1:
     case 2:
       pos = rand() % (v->count + 2);
-      val = rand() % 100;
+      val = rand() % 10000;
       printf("insert item %d at %d to vector = %d\n", val, pos,
              insert_to_vector(v, pos, val));
       break;

@@ -39,15 +39,24 @@ class Vector:
 
     def __repr__(self) -> str:
         result = []
-        indices = "".join([f"{i:3d}" for i in range(self.size)])
-        data = "".join([f"{self.data[i]:3d}" for i in range(self.size)])
 
-        result.append("+" * (len(indices) + 2))
-        result.append(f"|{indices} |")
-        result.append("-" * (len(indices) + 2))
-        result.append(f"|{data} |")
-        result.append("+" * (len(indices) + 2))
+        max_index_width = max(len(str(i)) for i in range(self.size))
+        max_data_width = max(len(str(self.data[i])) for i in range(self.size))
+
+        widths = [max(max_index_width, max_data_width) for _ in range(self.size)]
+
+        indices = " ".join([f"{i:{widths[i]}d}" for i in range(self.size)])
+        data = " ".join([f"{self.data[i]:{widths[i]}d}" for i in range(self.size)])
+
+        total_width = len(indices)
+
+        result.append("┌─" + "─" * total_width + "─┐")
+        result.append(f"│ {indices} │")
+        result.append("├─" + "─" * total_width + "─┤")
+        result.append(f"│ {data} │")
+        result.append("└─" + "─" * total_width + "─┘")
         result.append("")
+
         return "\n".join(result)
 
 
@@ -61,7 +70,7 @@ if __name__ == "__main__":
     for i in range(MAX_OPS):
         op = random.randint(0, 3)
         if op < 3:
-            n = random.randint(1, 99)
+            n = random.randint(1, 100000)
             pos = random.randint(0, vector.count + 1)
             print(f"insert {n} at position {pos} to vector = {vector.insert(pos, n)}")
         else:
