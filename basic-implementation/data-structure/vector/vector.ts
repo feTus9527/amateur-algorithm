@@ -109,7 +109,7 @@ class Vector {
 }
 
 (function () {
-  const MAX_OPS = 20;
+  const TOTAL_OPS = 20;
   const VECTOR_LENGTH = 2;
   const N_MAX = 10000;
   const INSERT_RATIO = 80;
@@ -117,7 +117,7 @@ class Vector {
 
   const vector = new Vector(VECTOR_LENGTH);
 
-  for (let i = 0; i < MAX_OPS; i++) {
+  for (let i = 0; i < TOTAL_OPS; i++) {
     const op = Math.floor(1 + Math.random() * 100);
     const pos = Math.floor(Math.random() * (vector.count + POSITION_OVERFLOW));
 

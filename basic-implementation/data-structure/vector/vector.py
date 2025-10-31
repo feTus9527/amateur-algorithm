@@ -63,17 +63,20 @@ class Vector:
 if __name__ == "__main__":
     import random
 
-    MAX_OPS = 20
+    TOTAL_OPS = 20
     VECTOR_LENGTH = 4
+    INSERT_RATIO = 75
+    N_MAX = 100000
+    POSITION_OVERFLOW = 2
+
     vector = Vector(VECTOR_LENGTH)
 
-    for i in range(MAX_OPS):
-        op = random.randint(0, 3)
-        if op < 3:
-            n = random.randint(1, 100000)
-            pos = random.randint(0, vector.count + 1)
+    for i in range(TOTAL_OPS):
+        op = random.randint(1, 100)
+        pos = random.randint(0, vector.count + POSITION_OVERFLOW)
+        if op < INSERT_RATIO:
+            n = random.randint(1, N_MAX)
             print(f"insert {n} at position {pos} to vector = {vector.insert(pos, n)}")
         else:
-            pos = random.randint(0, vector.count + 1)
             print(f"remove position {pos} from vector = {vector.remove(pos)}")
         print(vector)

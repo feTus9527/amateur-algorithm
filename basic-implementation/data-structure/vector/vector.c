@@ -122,25 +122,24 @@ void print_vector(vector *v) {
 
 int main(int argc, char *argv[]) {
   srand(time(0));
-#define MAX_OP 20
+#define TOTAL_OPS 20
 #define VECTOR_LENGTH 2
+#define N_MAX 10000
+#define INSERT_RATIO 75
+#define POSITION_OVERFLOW 2
+
   vector *v = construct_vector(VECTOR_LENGTH);
-  for (int i = 0; i < MAX_OP; i++) {
-    int op = rand() % 4, pos, val;
-    switch (op) {
-    case 0:
-    case 1:
-    case 2:
-      pos = rand() % (v->count + 2);
-      val = rand() % 10000;
+
+  for (int i = 0; i < TOTAL_OPS; i++) {
+    int op = rand() % 100;
+    int pos = rand() % (v->count + POSITION_OVERFLOW);
+    if (op < INSERT_RATIO) {
+      int val = rand() % N_MAX;
       printf("insert item %d at %d to vector = %d\n", val, pos,
              insert_to_vector(v, pos, val));
-      break;
-    case 3:
-      pos = rand() % (v->count + 2);
+    } else {
       printf("delete item at %d from vector = %d\n", pos,
              remove_from_vector(v, pos));
-      break;
     }
     print_vector(v);
   }

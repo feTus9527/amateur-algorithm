@@ -130,16 +130,20 @@ public class Vector {
     }
 
     public static void main(String[] args) {
-        final int MAX_OPS = 20;
+        final int TOTAL_OPS = 20;
         final int VECTOR_LENGTH = 2;
+        final int N_MAX = 10000;
+        final int INSERT_RATIO = 80;
+        final int POSITION_OVERFLOW = 2;
+
         Random random = new Random();
         Vector vector = new Vector(VECTOR_LENGTH);
 
-        for (int i = 0; i < MAX_OPS; i++) {
-            int op = random.nextInt(4);
-            int pos = random.nextInt(vector.getCount() + 2);
-            if (op < 3) {
-                int n = random.nextInt(10000);
+        for (int i = 0; i < TOTAL_OPS; i++) {
+            int op = random.nextInt(100);
+            int pos = random.nextInt(vector.getCount() + POSITION_OVERFLOW);
+            if (op < INSERT_RATIO) {
+                int n = random.nextInt(N_MAX);
                 int result = vector.insert(pos, n);
                 System.out.printf("insert %d at position %d from vector = %d\n", n, pos, result);
             } else {
