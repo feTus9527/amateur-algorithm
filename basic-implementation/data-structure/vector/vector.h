@@ -1,18 +1,18 @@
 #ifndef VECTOR_H
 #define VECTOR_H
 
-typedef struct vector {
+typedef struct Vector {
   int size, count;
   int *data;
-} vector;
+} Vector;
 
-vector *construct_vector(int n);
+Vector *construct_vector(int n);
 
-void destruct_vector(vector *p);
+void destruct_vector(Vector *p);
 
-int insert_to_vector(vector *p, int pos, int n);
+int insert_to_vector(Vector *p, int pos, int n);
 
-int remove_from_vector(vector *p, int pos);
+int remove_from_vector(Vector *p, int pos);
 
-int expand_vector(vector *p);
+int expand_vector(Vector *p);
 #endif

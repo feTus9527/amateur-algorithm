@@ -4,15 +4,15 @@
 
 #include "vector.h"
 
-vector *construct_vector(int n) {
-  vector *p = (vector *)malloc(sizeof(vector));
+Vector *construct_vector(int n) {
+  Vector *p = (Vector *)malloc(sizeof(Vector));
   p->size = n;
   p->count = 0;
   p->data = (int *)malloc(sizeof(int) * n);
   return p;
 }
 
-void destruct_vector(vector *p) {
+void destruct_vector(Vector *p) {
   if (p == NULL) {
     return;
   }
@@ -20,7 +20,7 @@ void destruct_vector(vector *p) {
   free(p);
 }
 
-int insert_to_vector(vector *p, int pos, int n) {
+int insert_to_vector(Vector *p, int pos, int n) {
   if (pos < 0 || pos > p->count) {
     return 0;
   }
@@ -35,7 +35,7 @@ int insert_to_vector(vector *p, int pos, int n) {
   return 1;
 }
 
-int remove_from_vector(vector *p, int pos) {
+int remove_from_vector(Vector *p, int pos) {
   if (pos < 0 || pos >= p->count) {
     return 0;
   }
@@ -46,7 +46,7 @@ int remove_from_vector(vector *p, int pos) {
   return 1;
 }
 
-int expand_vector(vector *v) {
+int expand_vector(Vector *v) {
   if (v == NULL) {
     return 0;
   }
@@ -59,7 +59,7 @@ int expand_vector(vector *v) {
   return 1;
 }
 
-void print_vector(vector *v) {
+void print_vector(Vector *v) {
   if (v == NULL || v->size == 0) {
     printf("Empty vector\n");
     return;
@@ -128,7 +128,7 @@ int main(int argc, char *argv[]) {
 #define INSERT_RATIO 75
 #define POSITION_OVERFLOW 2
 
-  vector *v = construct_vector(VECTOR_LENGTH);
+  Vector *v = construct_vector(VECTOR_LENGTH);
 
   for (int i = 0; i < TOTAL_OPS; i++) {
     int op = rand() % 100;
